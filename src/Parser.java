@@ -5,6 +5,7 @@ import java.util.Map;
 class Parser {
     private static Map<String,Integer> result;
 
+
     Parser(){
         result = new HashMap<>();
     }
@@ -23,7 +24,7 @@ class Parser {
              String[] arrayOfReservedWords = javaWords_String.split(" ");
 
              String fileToReadFrom_String = new String(bytesStreamInputFile);
-             String[] arrayInputFile = fileToReadFrom_String.split("\\s+|\\n+|\\t+|^[a-zA-Z]|^[0-9]");
+             String[] arrayInputFile = fileToReadFrom_String.split("\\s");
 
             for (int i = 0; i < arrayOfReservedWords.length; i++) {
                 int count = 0;
