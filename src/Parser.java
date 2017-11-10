@@ -20,16 +20,16 @@ class Parser {
              fileToReadFrom.read(bytesStreamInputFile, 0, bytesStreamInputFile.length);
 
              String javaWords_String = new String(bytesStreamJavaWords);
-             String[] arrayOfReservedWords = javaWords_String.split("\\n");
+             String[] arrayOfReservedWords = javaWords_String.split(" ");
 
              String fileToReadFrom_String = new String(bytesStreamInputFile);
-             String[] arrayInputFile = fileToReadFrom_String.split("\\s|\\W|\\D]");
+             String[] arrayInputFile = fileToReadFrom_String.split("\\s+|\\n+|\\t+|^[a-zA-Z]|^[0-9]");
 
-            for (int i = 0; i < arrayOfReservedWords.length ; i++) {
+            for (int i = 0; i < arrayOfReservedWords.length; i++) {
                 int count = 0;
-                for (String anArrayInputFile : arrayInputFile) {
-                    if (arrayOfReservedWords[i].equals(anArrayInputFile)) {
-                        result.put(arrayOfReservedWords[i], count++);
+                for (int j = 0; j < arrayInputFile.length; j++) {
+                    if(arrayOfReservedWords[i].equals(arrayInputFile[j])) {
+                        result.put(arrayOfReservedWords[i],++count);
                     }
                 }
             }
@@ -37,9 +37,10 @@ class Parser {
             String[] result_String = new String[result.size()];
             int index = 0;
             for (Map.Entry entry : result.entrySet()){
-                result_String[index] = "Word " + entry.getKey() + " was used in file "
-                        + inputFile
-                        + entry.getValue() + " times.";
+                result_String[index] = "Word " + "\"" + entry.getKey() + "\"" +
+                        " was used in file "
+                        + inputFile + " "
+                        + entry.getValue() + " times.\n";
                 index++;
             }
 
